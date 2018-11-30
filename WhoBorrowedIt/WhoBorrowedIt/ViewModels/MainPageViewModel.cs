@@ -21,6 +21,7 @@ namespace WhoBorrowedIt.ViewModels
             _navigation = navigation;
             _repository = repository;
             NavigateToAddLentItemCommand = new Command(NavigateToAddLentItem);
+            NavigateToLentItemsCommand = new Command(NavigateToLentItems);
 
             _items = _repository.GetAll();
             LentCount = _items.Count();
@@ -28,6 +29,7 @@ namespace WhoBorrowedIt.ViewModels
         }
 
         public ICommand NavigateToAddLentItemCommand { get; set; }
+        public ICommand NavigateToLentItemsCommand { get; set; }
 
         public int LentCount { get; set; } = 5;
         public int LentOverDueCount { get; set; } = 0;
@@ -38,6 +40,11 @@ namespace WhoBorrowedIt.ViewModels
         private void NavigateToAddLentItem()
         {
             _navigation.PushAsync(new AddLentItemPage());
+        }
+
+        private void NavigateToLentItems()
+        {
+            _navigation.PushAsync(new LentItemsListPage());
         }
     }
 }
