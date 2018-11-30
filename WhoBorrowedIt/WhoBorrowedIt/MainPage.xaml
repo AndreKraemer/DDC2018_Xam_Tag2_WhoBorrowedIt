@@ -4,11 +4,37 @@
              xmlns:local="clr-namespace:WhoBorrowedIt"
              x:Class="WhoBorrowedIt.MainPage">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackLayout Grid.Row="0" Grid.Column="0">
+            <Label Text="{Binding LentCount}"></Label>
+            <Label Text="verliehene Dinge"></Label>
+            <Button Text="+" Command="{Binding NavigateToAddLentItemCommand}"></Button>
+        </StackLayout>
+        <StackLayout Grid.Row="0" Grid.Column="1">
+            <Label Text="{Binding LentOverDueCount}"></Label>
+            <Label Text="überfällige verliehene Dinge"></Label>
+        </StackLayout>
+        <StackLayout Grid.Row="1" Grid.Column="0">
+            <Label Text="{Binding BorrowedCount}"></Label>
+            <Label Text="geliehene Dinge"></Label>
+            <Button Text="+"></Button>
+        </StackLayout>
+        <StackLayout Grid.Row="1" Grid.Column="1">
+            <Label Text="{Binding BorrowedOverDueCount}"></Label>
+            <Label Text="überfällige geliehene Dinge"></Label>
+        </StackLayout>
+    </Grid>
+
+
+
 
 </ContentPage>
