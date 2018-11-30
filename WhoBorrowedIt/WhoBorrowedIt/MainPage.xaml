@@ -8,6 +8,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -15,9 +16,17 @@
         </Grid.ColumnDefinitions>
 
         <StackLayout Grid.Row="0" Grid.Column="0">
-            <Button Text="{Binding LentCount}" FontSize="48" BackgroundColor="White" Command="{Binding NavigateToLentItemsCommand}" ></Button>
+            <Label Text="{Binding LentCount}" FontSize="48" HorizontalOptions="CenterAndExpand">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateToLentItemsCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
             <Label Text="verliehene Dinge" FontSize="24" HorizontalOptions="CenterAndExpand"></Label>
-            <Button Text="+" Command="{Binding NavigateToAddLentItemCommand}"></Button>
+            <Label Text="+" FontSize="36" HorizontalOptions="CenterAndExpand">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateToAddLentItemCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
         </StackLayout>
         <StackLayout Grid.Row="0" Grid.Column="1">
             <Label Text="{Binding LentOverDueCount}"></Label>
@@ -32,6 +41,13 @@
             <Label Text="{Binding BorrowedOverDueCount}"></Label>
             <Label Text="überfällige geliehene Dinge"></Label>
         </StackLayout>
+        
+        <Label Grid.Row="2" Grid.ColumnSpan="2" HorizontalTextAlignment="Center" Text="Personenliste">
+
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding NavigateToPersonsCommand}" />
+            </Label.GestureRecognizers>
+        </Label>
     </Grid>
 
 

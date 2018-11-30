@@ -14,6 +14,12 @@ namespace WhoBorrowedIt
         public MainPage()
         {
             InitializeComponent();
+           
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
             BindingContext = new MainPageViewModel(Navigation, new SqlLiteLentItemsRepository());
         }
     }
