@@ -3,10 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WhoBorrowedIt.Views.AddLentItemPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Padding="20">
+            <Label Text="Wem habe ich es geliehen?" HorizontalOptions="FillAndExpand" />
+            <Entry Text="{Binding Person, Mode=TwoWay}" HorizontalOptions="FillAndExpand"></Entry>
+            <Label Text="Was habe ich verliehen?" HorizontalOptions="FillAndExpand" />
+            <Entry Text="{Binding Item, Mode=TwoWay}" HorizontalOptions="FillAndExpand"></Entry>
+            <Label Text="Wann habe ich es verliehen?" HorizontalOptions="FillAndExpand" />
+            <DatePicker Date="{Binding LentDate, Mode=TwoWay}" HorizontalOptions="FillAndExpand"></DatePicker>
+            <Label Text="Wann möchte ich es zurück?" HorizontalOptions="FillAndExpand" />
+            <DatePicker Date="{Binding DueDate, Mode=TwoWay}" HorizontalOptions="FillAndExpand"></DatePicker>
+            <Button Text="Jetzt verleihen" Command="{Binding SaveCommand}"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
