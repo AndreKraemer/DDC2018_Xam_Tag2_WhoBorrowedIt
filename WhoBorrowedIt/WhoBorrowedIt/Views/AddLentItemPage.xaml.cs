@@ -16,7 +16,7 @@ namespace WhoBorrowedIt.Views
 		public AddLentItemPage ()
 		{
 			InitializeComponent ();
-            BindingContext = new AddLentItemPageViewModel(Navigation, new FileLentItemsRepository());
+            BindingContext = new AddLentItemPageViewModel(Navigation, new SqlLiteLentItemsRepository());
 		}
 	}
 }

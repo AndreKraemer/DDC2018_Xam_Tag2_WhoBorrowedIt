@@ -19,7 +19,7 @@ namespace WhoBorrowedIt.Views
         {
             InitializeComponent();
 
-            var repository = new FileLentItemsRepository();
+            var repository = new SqlLiteLentItemsRepository();
             Items = new ObservableCollection<LentItem>(repository.GetAll());
 			MyListView.ItemsSource = Items;
         }

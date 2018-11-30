@@ -14,7 +14,7 @@ namespace WhoBorrowedIt
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = new MainPageViewModel(Navigation, new FileLentItemsRepository());
+            BindingContext = new MainPageViewModel(Navigation, new SqlLiteLentItemsRepository());
         }
     }
 }
