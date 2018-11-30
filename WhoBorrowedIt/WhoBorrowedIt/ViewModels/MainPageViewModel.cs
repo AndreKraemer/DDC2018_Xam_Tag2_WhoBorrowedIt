@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
+using WhoBorrowedIt.Models;
+using WhoBorrowedIt.Repositories;
 using WhoBorrowedIt.Views;
 using Xamarin.Forms;
 
@@ -10,11 +13,18 @@ namespace WhoBorrowedIt.ViewModels
     public class MainPageViewModel
     {
         private readonly INavigation _navigation;
+        private readonly ILentItemsRepository _repository;
+        private IEnumerable<LentItem> _items;
 
-        public MainPageViewModel(INavigation navigation)
+        public MainPageViewModel(INavigation navigation, ILentItemsRepository repository)
         {
             _navigation = navigation;
+            _repository = repository;
             NavigateToAddLentItemCommand = new Command(NavigateToAddLentItem);
+
+            _items = _repository.GetAll();
+            LentCount = _items.Count();
+            LentOverDueCount = _items.Count(x => x.DueDate < DateTime.Today);
         }
 
         public ICommand NavigateToAddLentItemCommand { get; set; }

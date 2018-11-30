@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WhoBorrowedIt.Repositories;
 using WhoBorrowedIt.ViewModels;
 using Xamarin.Forms;
 
@@ -13,7 +14,7 @@ namespace WhoBorrowedIt
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = new MainPageViewModel(Navigation);
+            BindingContext = new MainPageViewModel(Navigation, new FileLentItemsRepository());
         }
     }
 }

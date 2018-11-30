@@ -1,5 +1,6 @@
 using System;
 using NSubstitute;
+using WhoBorrowedIt.Repositories;
 using WhoBorrowedIt.ViewModels;
 using Xamarin.Forms;
 using Xunit;
@@ -8,31 +9,39 @@ namespace WhoBorrowedIt.Tests
 {
     public class AddLentITemPageViewModelTests
     {
+        private INavigation _nav;
+        private AddLentItemPageViewModel _vm;
+        private ILentItemsRepository _repository;
+
+        public AddLentITemPageViewModelTests()
+        {
+            _repository = Substitute.For<ILentItemsRepository>();
+            _nav = NSubstitute.Substitute.For<INavigation>();
+            _vm = new AddLentItemPageViewModel(_nav, _repository);
+        }
+
         [Fact]
         public void LentDate_DefaultsTo_Today()
         {
             // arrange
-            var nav = NSubstitute.Substitute.For<INavigation>();
-            var vm = new AddLentItemPageViewModel(nav);
 
             // act
 
             // assert
 
-            Assert.Equal(DateTime.Today, vm.LentDate);
+            Assert.Equal(DateTime.Today, _vm.LentDate);
         }
         [Fact]
         public void DueDate_DefaultsTo_FutureDate()
         {
             // arrange
-            var nav = NSubstitute.Substitute.For<INavigation>();
-            var vm = new AddLentItemPageViewModel(nav);
+
 
             // act
 
             // assert
 
-            Assert.Equal(DateTime.Today.AddDays(10), vm.DueDate);
+            Assert.Equal(DateTime.Today.AddDays(10), _vm.DueDate);
         }
 
 
@@ -40,14 +49,13 @@ namespace WhoBorrowedIt.Tests
         public void Execute_SaveCommand_NavigatesBack()
         {
             // arrange
-            var nav = NSubstitute.Substitute.For<INavigation>();
-            var vm = new AddLentItemPageViewModel(nav);
+
 
             // act
-            vm.SaveCommand.Execute(null);
+            _vm.SaveCommand.Execute(null);
 
             //Assert
-            nav.Received().PopAsync();
+            _nav.Received().PopAsync();
 
         }
     }

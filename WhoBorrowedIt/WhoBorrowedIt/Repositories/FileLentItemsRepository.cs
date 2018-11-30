@@ -3,16 +3,17 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using WhoBorrowedIt.Models;
+using Xamarin.Essentials;
 
 namespace WhoBorrowedIt.Repositories
 {
     public class FileLentItemsRepository : ILentItemsRepository
     {
-        private List<LentItem> _items = new List<LentItem>();
+        private readonly List<LentItem> _items;
 
         public FileLentItemsRepository()
         {
-            // TODO: Datei lesen ....
+            _items = ReadFile();
         }
 
         public void Add(LentItem item)
@@ -43,7 +44,7 @@ namespace WhoBorrowedIt.Repositories
             var itemToDelete = _items.FirstOrDefault(x => x.Id == item.Id);
             if (itemToDelete != null)
             {
-                _items.Remove(itemToDelete); 
+                _items.Remove(itemToDelete);
             }
 
             SaveToFile();
@@ -52,9 +53,23 @@ namespace WhoBorrowedIt.Repositories
         private void SaveToFile()
         {
             var json = JsonConvert.SerializeObject(_items);
-            var path = "";
+            var path = Path.Combine(FileSystem.AppDataDirectory, "lentitems.json");
 
             File.WriteAllText(path, json);
+        }
+
+        private List<LentItem> ReadFile()
+        {
+           
+            var path = Path.Combine(FileSystem.AppDataDirectory, "lentitems.json");
+            if (!File.Exists(path))
+            {
+                return new List<LentItem>();
+            }
+            var json = File.ReadAllText(path);
+
+            var items = JsonConvert.DeserializeObject<List<LentItem>>(json);
+            return items;
         }
     }
 }
